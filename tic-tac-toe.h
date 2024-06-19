@@ -4,23 +4,20 @@
 #include <iostream>
 #include <map>
 
-class Square;
-
-class Grid;
-
-class Display;
-
-class Observer {
-  protected:
-  enum SubscriptionType { All, Inline };
-  public:
-    virtual void notify(Grid* g) = 0;
-    virtual ~Observer() = default;
-};
-
 enum class PathType { H, V, D };
 
 enum class Mark { X, O, None };
+
+class Grid;
+
+class Display {
+  const static size_t size = 3;
+  std::array<std::array<char,size>,size> theDisplay;
+  public:
+    Display();
+    void notify(Square* s);
+    friend std::ostream& operator<<(std::ostream& out, Display* d);
+};
 
 class Path {
   PathType type;
@@ -62,15 +59,6 @@ class Square {
     friend std::ostream& operator<<(std::ostream& o, Square s);
 };
 
-class Display {
-  const static size_t size = 3;
-  std::array<std::array<char,size>,size> theDisplay;
-  public:
-    Display();
-    void notify(Square* s);
-    friend std::ostream& operator<<(std::ostream& out, Display* d);
-};
-
 class Grid {
   static const size_t size = 3;
   std::array<std::array<Square*,size>,size> theGrid;
@@ -90,4 +78,12 @@ class Grid {
     void setXTurn(Square* s);
     void setSquare();
     friend std::ostream& operator<<(std::ostream& out, Grid g);
+};
+
+class Observer {
+  protected:
+  enum SubscriptionType { All, Inline };
+  public:
+    virtual void notify(Grid* g) = 0;
+    virtual ~Observer() = default;
 };
