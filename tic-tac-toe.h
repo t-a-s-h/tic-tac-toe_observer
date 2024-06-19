@@ -10,6 +10,8 @@ enum class Mark { X, O, None };
 
 class Grid;
 
+class Square;
+
 class Display {
   const static size_t size = 3;
   std::array<std::array<char,size>,size> theDisplay;
