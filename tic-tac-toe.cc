@@ -41,7 +41,7 @@ Grid::Grid():xTurn{true},dp{new Display},gameOver{false} {
   }
 }
 
-void Grid::setGameOver() { gameOver = true; }
+void Grid::setGameOver() {cout << "game over"  << endl; gameOver = true; }
 
 void Square::setCoords(int x, int y) { row = y; col = x; }
 
@@ -100,6 +100,7 @@ const PathType Path::getType() const { return type; }
 size_t Path::getTypeCount() { return count; }
 
 void Square::notify(Grid* g) {
+  g->incNumPlayed();
   if (getPlayed()) return;
   setType(g->getXTurn());
   for (auto& [path, n] : inPaths) {
@@ -111,9 +112,8 @@ void Square::notify(Grid* g) {
     } else {
       path->resetCount();
     }
-    if (path->getTypeCount() >= size) {
+    if (path->getTypeCount() >= size || g->isDraw()) {
       g->setGameOver();
-      cout << (g->isGameOver() ? "game over" : "game not over") << endl;
       return;
     }
   }
@@ -139,7 +139,16 @@ ostream& operator<<(ostream& out, Display* d) {
 
 const bool Grid::getXTurn() const { return xTurn; }
 
+const size_t Grid::incNumPlayed() { return ++num_played; }
+
 void Grid::setXTurn(Square* s) { xTurn = !xTurn; xTurn ? s->setType(false) : s->setType(true); }
+
+const bool Grid::isDraw() { 
+  if ((num_played) >= 9) {
+    return true;
+  }
+  return false;
+}
 
 void Grid::setSquare() {
   int x,y;

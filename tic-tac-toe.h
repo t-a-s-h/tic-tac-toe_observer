@@ -75,11 +75,14 @@ class Grid {
   static const size_t size = 3;
   std::array<std::array<Square*,size>,size> theGrid;
   bool xTurn;
+  size_t num_played;
   std::map<Path*,size_t> pathList;
   Display* dp;
   bool gameOver;
   public: 
     size_t getCount(Path* p);
+    const bool isDraw();
+    const size_t incNumPlayed();
     void setGameOver();
     Grid();
     bool isGameOver();

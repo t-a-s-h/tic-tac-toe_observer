@@ -8,5 +8,6 @@ int main() {
     g.setSquare();
     cout << g;
   }
-  cout << (!g.getXTurn() ? 'X' : 'O') << " WINS!" << endl;
+  if (!g.isDraw()) cout << (!g.getXTurn() ? 'X' : 'O') << " WINS!" << endl;
+  else cout << "Draw." << endl;
 }
