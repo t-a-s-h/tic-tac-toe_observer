@@ -4,7 +4,7 @@ using namespace std;
 
 Display::Display(){ for (auto& r : theDisplay) r.fill(' '); }
 
-Grid::Grid():xTurn{true},dp{new Display},gameOver{false} {
+Grid::Grid():xTurn{true},num_played{0},dp{new Display},gameOver{false} {
   for (size_t i = 0; i < size; ++i) {
     pathList[new Path(PathType::H,i)] = 0;
     pathList[new Path(PathType::V,i)] = 0;
