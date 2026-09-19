@@ -4,7 +4,9 @@ A simple command line game of tic-tac-toe.
 ## Tech
 C++.
 ## Run
-
+### Option 1
+- View demo [here](https://www.onlinegdb.com/edit/Dwe7fH6xe#)
+### Option 2
 - Download [here](https://github.com/t-a-s-h/tic-tac-toe_observer/archive/refs/heads/main.zip).
 - Unzip folder.
 - Navigate to unzipped folder in terminal.
